@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MG Menu — Pricing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --accent: #0ea5e9;
+    --accent-dark: #0284c7;
+    --green: #10b981;
+    --green-light: #d1fae5;
+    --muted: #64748b;
+    --border: rgba(148,163,184,0.2);
+    --glass: rgba(255,255,255,0.8);
+    --glass-border: rgba(255,255,255,0.6);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+    color: #1e293b;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin: -56px -40px 56px -40px;
+  }
+
+  .marquee-container {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .marquee {
+    display: flex;
+    animation: scroll 40s linear infinite;
+    white-space: nowrap;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .marquee span {
+    margin-right: 32px;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── HEADER SECTION ── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+
+  .header-text h1 {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header-text p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .logo-slot {
+    width: 72px;
+    height: 72px;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    text-align: center;
+    color: var(--muted);
+    line-height: 1.3;
+    padding: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  .logo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  /* ── TIER CARDS ── */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 120px;
+  }
+
+  .tier-card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  }
+
+  .tier-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+  }
+
+  .tier-card.featured {
+    background: linear-gradient(135deg, rgba(14,165,233,0.15) 0%, rgba(16,185,129,0.15) 100%);
+    border: 1.5px solid rgba(14,165,233,0.5);
+    transform: scale(1.02);
+  }
+
+  .tier-card.featured:hover {
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  .tier-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .tier-name {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #1e293b;
+  }
+
+  .tier-qty {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .tier-price {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .tier-per {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .savings-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #d1fae5 0%, #cffafe 100%);
+    color: #059669;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* ── MODAL ── */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal.active {
+    display: flex;
+  }
+
+  .modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .modal-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 24px;
+  }
+
+  .modal-input-group {
+    margin-bottom: 20px;
+  }
+
+  .modal-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .modal-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: inherit;
+  }
+
+  .modal-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
+  }
+
+  .modal-total {
+    background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  .modal-total-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .modal-total-price {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+    border-radius: 28px;
+    padding: 48px;
+    color: white;
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .cta-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.9;
+    margin-bottom: 12px;
+  }
+
+  .cta-title {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .cta-sub {
+    font-size: 16px;
+    opacity: 0.95;
+    margin-bottom: 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .cta-pill {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: white;
+    color: #0ea5e9;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header {
+      grid-template-columns: 1fr;
+    }
+
+    .header-text h1 {
+      font-size: 36px;
+    }
+
+    .tiers {
+      grid-template-columns: 1fr;
+    }
+
+    .tier-card.featured {
+      transform: scale(1);
+    }
+
+    .cta-section {
+      padding: 32px;
+    }
+
+    .cta-title {
+      font-size: 28px;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="marquee-container">
+    <div class="marquee">
+      <span>MG Menu · Official Pricing</span>
+      <span>•</span>
+      <span>Premium Live Resin + Liquid Diamonds</span>
+      <span>•</span>
+      <span>Distributed by Highline</span>
+      <span>•</span>
+      <span>MG Menu · Official Pricing</span>
+      <span>•</span>
+      <span>Premium Live Resin + Liquid Diamonds</span>
+      <span>•</span>
+      <span>Distributed by Highline</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="header">
+    <div class="header-text">
+      <h1>MG Menu</h1>
+      <p>Premium Live Resin & Liquid Diamonds 2g Dual Cartridges</p>
+      <p>Distributed by <strong>Highline Reserve</strong></p>
+    </div>
+    <div class="logo-grid">
+      <div class="logo-slot">
+        <img src="mg-logo.jpg" alt="MG Logo">
+      </div>
+      <div class="logo-slot">
+        <img src="highline-logo.png" alt="Highline Logo">
+      </div>
+    </div>
+  </div>
+
+  <div class="tiers">
+    <div class="tier-card">
+      <div class="tier-num">1</div>
+      <div class="tier-name">Solo</div>
+      <div class="tier-qty">1 unit</div>
+      <div class="tier-price">$32</div>
+      <div class="tier-per">per unit</div>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-num">2</div>
+      <div class="tier-name">Bag</div>
+      <div class="tier-qty">10 – 99 units</div>
+      <div class="tier-price">$28</div>
+      <div class="tier-per">per unit</div>
+      <div class="savings-badge">Save $4</div>
+    </div>
+
+    <div class="tier-card featured">
+      <div class="tier-num">3</div>
+      <div class="tier-name">Box</div>
+      <div class="tier-qty">100 – 249 units</div>
+      <div class="tier-price">$23</div>
+      <div class="tier-per">per unit</div>
+      <div class="savings-badge">Save $9</div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-eyebrow">Moving serious volume?</div>
+    <div class="cta-title">Wholesale & Distributor Pricing</div>
+    <div class="cta-sub">Accounts moving 250+ units get exclusive wholesale pricing.</div>
+    <div class="cta-tiers">
+      <div class="cta-pill">Stack · 250–999 units @ $20</div>
+      <div class="cta-pill">Case · 1,000–2,499 units @ $19</div>
+      <div class="cta-pill">Wholesale · 2,500–4,999 units @ $18</div>
+      <div class="cta-pill">Partner · 5,000+ units @ $17</div>
+    </div>
+    <button class="cta-button" onclick="window.location.href='https://t.me/YOUR_TELEGRAM_USERNAME'">Inquire on Pricing</button>
+  </div>
+
+  <div class="footer">
+    © 2026 MG · Premium Live Resin + Liquid Diamonds · Distributed by Highline Reserve
+  </div>
+
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-title" id="modalTierName">Solo</div>
+    <div class="modal-input-group">
+      <label class="modal-label">Quantity</label>
+      <input type="number" class="modal-input" id="qtyInput" placeholder="Enter quantity" min="1">
+    </div>
+    <div class="modal-total">
+      <div class="modal-total-label">Total Price</div>
+      <div class="modal-total-price" id="totalPrice">$32.00</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const tiers = [
+    { name: 'Solo', qty: '1', price: 32.00 },
+    { name: 'Bag', qty: '10–99', price: 28.00 },
+    { name: 'Box', qty: '100–249', price: 23.00 }
+  ];
+
+  const modal = document.getElementById('modal');
+  const modalTierName = document.getElementById('modalTierName');
+  const qtyInput = document.getElementById('qtyInput');
+  const totalPrice = document.getElementById('totalPrice');
+
+  let currentPrice = 32.00;
+
+  document.querySelectorAll('.tier-card').forEach((card, i) => {
+    card.addEventListener('click', () => {
+      currentPrice = tiers[i].price;
+      modalTierName.textContent = tiers[i].name;
+      qtyInput.value = tiers[i].qty.split('–')[0];
+      updateTotal();
+      modal.classList.add('active');
+    });
+  });
+
+  qtyInput.addEventListener('input', updateTotal);
+
+  function updateTotal() {
+    const qty = parseInt(qtyInput.value) || 0;
+    const total = (qty * currentPrice).toFixed(2);
+    totalPrice.textContent = '$' + total;
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
