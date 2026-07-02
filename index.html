@@ -451,7 +451,7 @@
       <div class="tier-num">1</div>
       <div class="tier-name">Solo</div>
       <div class="tier-qty">1 unit</div>
-      <div class="tier-price">$32</div>
+      <div class="tier-price">$30</div>
       <div class="tier-per">per unit</div>
     </div>
 
@@ -461,16 +461,16 @@
       <div class="tier-qty">10 – 99 units</div>
       <div class="tier-price">$28</div>
       <div class="tier-per">per unit</div>
-      <div class="savings-badge">Save $4</div>
+      <div class="savings-badge">Save $2</div>
     </div>
 
     <div class="tier-card featured">
       <div class="tier-num">3</div>
       <div class="tier-name">Box</div>
       <div class="tier-qty">100 – 249 units</div>
-      <div class="tier-price">$23</div>
+      <div class="tier-price">$25</div>
       <div class="tier-per">per unit</div>
-      <div class="savings-badge">Save $9</div>
+      <div class="savings-badge">Save $5</div>
     </div>
   </div>
 
@@ -502,16 +502,16 @@
     </div>
     <div class="modal-total">
       <div class="modal-total-label">Total Price</div>
-      <div class="modal-total-price" id="totalPrice">$32.00</div>
+      <div class="modal-total-price" id="totalPrice">$30.00</div>
     </div>
   </div>
 </div>
 
 <script>
   const tiers = [
-    { name: 'Solo', qty: '1', price: 32.00 },
+    { name: 'Solo', qty: '1', price: 30.00 },
     { name: 'Bag', qty: '10–99', price: 28.00 },
-    { name: 'Box', qty: '100–249', price: 23.00 }
+    { name: 'Box', qty: '100–249', price: 25.00 }
   ];
 
   const modal = document.getElementById('modal');
@@ -519,7 +519,7 @@
   const qtyInput = document.getElementById('qtyInput');
   const totalPrice = document.getElementById('totalPrice');
 
-  let currentPrice = 32.00;
+  let currentPrice = 30.00;
 
   document.querySelectorAll('.tier-card').forEach((card, i) => {
     card.addEventListener('click', () => {
