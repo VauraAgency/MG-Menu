@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MG Menu — Pricing</title>
+<title>MG — Pricing</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 
@@ -48,60 +48,100 @@
     margin: -56px -40px 56px -40px;
   }
 
-  .marquee-container {
-    overflow: hidden;
-    width: 100%;
-  }
-
-  .marquee {
+  .topbar-content {
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
-    animation: scroll 40s linear infinite;
-    white-space: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
     font-size: 13px;
     color: var(--muted);
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .topbar-text {
+    display: flex;
+    gap: 40px;
+    animation: rotateText 8s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes rotateText {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .topbar-text:hover {
+    animation-play-state: paused;
+  }
+
+  .topbar-text span {
+    letter-spacing: 0.08em;
     font-weight: 500;
-    letter-spacing: 0.05em;
   }
 
-  .marquee span {
-    margin-right: 32px;
-  }
-
-  @keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* ── HEADER SECTION ── */
-  .header {
+  /* ── HEADER ── */
+  header {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-    margin-bottom: 80px;
+    gap: 32px;
+    margin-bottom: 56px;
+    animation: slideDown 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
   }
 
-  .header-text h1 {
-    font-size: 56px;
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .brand-block {}
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .powered-by {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: clamp(48px, 8vw, 72px);
     font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 16px;
+    line-height: 1;
+    letter-spacing: -0.03em;
     background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
   }
 
-  .header-text p {
-    font-size: 16px;
+  .tagline {
+    font-size: 15px;
     color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 24px;
+    letter-spacing: 0.02em;
   }
 
-  .logo-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .logo-area {
+    display: flex;
+    align-items: center;
     gap: 16px;
+    flex-shrink: 0;
+    width: 100%;
   }
 
   .logo-slot {
@@ -110,7 +150,7 @@
     background: var(--glass);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
-    border-radius: 18px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -120,22 +160,40 @@
     line-height: 1.3;
     padding: 8px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-    overflow: hidden;
   }
 
-  .logo-slot img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 16px;
+  .logo-divider {
+    width: 1px;
+    height: 48px;
+    background: var(--border);
   }
 
-  /* ── TIER CARDS ── */
-  .tiers {
+  /* ── SECTION ── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── TIER GRID ── */
+  .tier-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 120px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
   }
 
   .tier-card {
@@ -144,408 +202,644 @@
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
-    padding: 32px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    animation: scaleIn 0.5s ease both;
     position: relative;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  .tier-card:nth-child(1) { animation-delay: 0.05s; }
+  .tier-card:nth-child(2) { animation-delay: 0.1s; }
+  .tier-card:nth-child(3) { animation-delay: 0.15s; }
+  .tier-card:nth-child(4) { animation-delay: 0.2s; }
+  .tier-card:nth-child(5) { animation-delay: 0.25s; }
+  .tier-card:nth-child(6) { animation-delay: 0.3s; }
+  .tier-card:nth-child(7) { animation-delay: 0.35s; }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
   }
 
   .tier-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+    transform: translateY(-8px);
+    background: rgba(255,255,255,0.9);
+    border-color: rgba(14,165,233,0.3);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.08);
   }
 
   .tier-card.featured {
-    background: linear-gradient(135deg, rgba(14,165,233,0.15) 0%, rgba(16,185,129,0.15) 100%);
-    border: 1.5px solid rgba(14,165,233,0.5);
-    transform: scale(1.02);
+    background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(14,165,233,0.1) 100%);
+    border-color: rgba(16,185,129,0.3);
   }
 
   .tier-card.featured:hover {
-    transform: scale(1.02) translateY(-4px);
+    background: linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(14,165,233,0.15) 100%);
+    border-color: rgba(16,185,129,0.5);
+  }
+
+  .tier-card.top {
+    background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(16,185,129,0.1) 100%);
+    border-color: rgba(14,165,233,0.3);
+  }
+
+  .tier-card.top:hover {
+    background: linear-gradient(135deg, rgba(14,165,233,0.15) 0%, rgba(16,185,129,0.15) 100%);
+    border-color: rgba(14,165,233,0.5);
   }
 
   .tier-num {
-    font-size: 11px;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 700;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 8px;
+    color: white;
+    font-size: 16px;
+    margin: 0 auto 14px;
   }
 
   .tier-name {
-    font-size: 28px;
-    font-weight: 800;
-    margin-bottom: 12px;
+    font-size: 17px;
+    font-weight: 700;
     color: #1e293b;
+    margin-bottom: 4px;
   }
 
   .tier-qty {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--muted);
-    margin-bottom: 24px;
-    font-weight: 500;
+    margin-bottom: 16px;
   }
 
   .tier-price {
     font-size: 48px;
     font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
     background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    line-height: 1;
-    margin-bottom: 4px;
+    background-clip: text;
+    margin-bottom: 2px;
   }
 
   .tier-per {
     font-size: 12px;
     color: var(--muted);
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
   .savings-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #d1fae5 0%, #cffafe 100%);
-    color: #059669;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  /* ── MODAL ── */
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(4px);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modal.active {
-    display: flex;
-  }
-
-  .modal-content {
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  }
-
-  .modal-title {
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: 24px;
-  }
-
-  .modal-input-group {
-    margin-bottom: 20px;
-  }
-
-  .modal-label {
-    font-size: 12px;
+    background: linear-gradient(135deg, var(--green-light) 0%, rgba(16,185,129,0.1) 100%);
+    color: var(--green);
     font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 12px;
     letter-spacing: 0.05em;
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  .modal-input {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    font-size: 16px;
-    font-family: inherit;
-  }
-
-  .modal-input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
-  }
-
-  .modal-total {
-    background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 24px;
-    text-align: center;
-  }
-
-  .modal-total-label {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-
-  .modal-total-price {
-    font-size: 36px;
-    font-weight: 800;
-    background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    border: 1px solid rgba(16,185,129,0.2);
   }
 
   /* ── CTA SECTION ── */
   .cta-section {
     background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
     border-radius: 28px;
-    padding: 48px;
-    color: white;
+    padding: 52px 40px;
     text-align: center;
-    margin-bottom: 80px;
+    color: white;
+    box-shadow: 0 20px 48px rgba(14,165,233,0.15);
+    animation: fadeInUp 0.6s 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+    pointer-events: none;
   }
 
   .cta-eyebrow {
     font-size: 12px;
-    font-weight: 700;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.9;
-    margin-bottom: 12px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 10px;
+    font-weight: 600;
   }
 
   .cta-title {
-    font-size: 40px;
+    font-size: clamp(28px, 5vw, 44px);
     font-weight: 800;
-    margin-bottom: 16px;
     line-height: 1.2;
+    color: white;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
   }
 
   .cta-sub {
-    font-size: 16px;
-    opacity: 0.95;
-    margin-bottom: 32px;
-    max-width: 600px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
   }
 
   .cta-tiers {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
   }
 
   .cta-pill {
     background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 13px;
-    font-weight: 600;
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    font-size: 12px;
+    padding: 7px 14px;
+    border-radius: 16px;
+    font-weight: 500;
   }
 
-  .cta-button {
-    display: inline-block;
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     background: white;
     color: #0ea5e9;
-    padding: 14px 32px;
-    border-radius: 12px;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 15px;
+    padding: 16px 40px;
+    border-radius: 50px;
     text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
     border: none;
-    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    font-family: 'Inter', sans-serif;
   }
 
-  .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  .cta-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+  }
+
+  .cta-note {
+    margin-top: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
   }
 
   /* ── FOOTER ── */
-  .footer {
+  footer {
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
     text-align: center;
-    padding: 40px 0;
+    font-size: 12px;
     color: var(--muted);
-    font-size: 13px;
+    letter-spacing: 0.05em;
+    animation: fadeIn 0.6s 0.5s ease both;
   }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .header {
-      grid-template-columns: 1fr;
-    }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+  }
 
-    .header-text h1 {
-      font-size: 36px;
-    }
+  .footer-brand-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 
-    .tiers {
-      grid-template-columns: 1fr;
-    }
+  .footer-brand img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
 
-    .tier-card.featured {
-      transform: scale(1);
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 
-    .cta-section {
-      padding: 32px;
-    }
+  /* ── CALCULATOR MODAL ── */
+  .calc-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease;
+  }
 
-    .cta-title {
-      font-size: 28px;
+  .calc-modal.active {
+    display: flex;
+  }
+
+  .calc-card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 32px;
+    padding: 48px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    animation: scaleUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  @keyframes scaleUp {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .calc-tier-name {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .calc-tier-price {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px;
+  }
+
+  .calc-per-unit {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  .calc-qty-group {
+    margin-bottom: 28px;
+  }
+
+  .calc-qty-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: block;
+    font-weight: 600;
+  }
+
+  .calc-qty-input {
+    width: 100%;
+    background: var(--bg-alt);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .calc-qty-input:focus {
+    border-color: var(--accent);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
+  }
+
+  .calc-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
+
+  .calc-total {
+    margin-bottom: 28px;
+  }
+
+  .calc-total-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .calc-total-value {
+    font-size: 56px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .calc-close-hint {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── PRODUCT CAROUSEL (3 Column) ── */
+  .carousel-container-header {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+    margin-top: 16px;
+  }
+
+  .carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 0;
+    animation: scrollHorizontal 15s linear infinite;
+  }
+
+  @keyframes scrollHorizontal {
+    0% {
+      transform: translateX(0);
     }
+    100% {
+      transform: translateX(-66.667%);
+    }
+  }
+
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  .carousel-slide {
+    position: relative;
+    flex: 0 0 33.333%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @media (max-width: 800px) {
+    header { grid-template-columns: 1fr; }
+    .header-right { gap: 16px; }
+    .carousel-container-header { height: 100px; }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 32px 16px 60px; }
+    .topbar { margin: -32px -16px 32px -16px; padding: 12px 16px; }
+    .carousel-container-header { height: 80px; margin-top: 12px; }
+    .tier-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 40px 24px; }
   }
 
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="marquee-container">
-    <div class="marquee">
-      <span>MG Menu · Official Pricing</span>
-      <span>•</span>
-      <span>Premium Live Resin + Liquid Diamonds</span>
-      <span>•</span>
-      <span>Distributed by Highline</span>
-      <span>•</span>
-      <span>MG Menu · Official Pricing</span>
-      <span>•</span>
-      <span>Premium Live Resin + Liquid Diamonds</span>
-      <span>•</span>
-      <span>Distributed by Highline</span>
-    </div>
-  </div>
-</div>
-
-<div class="page">
-
-  <div class="header">
-    <div class="header-text">
-      <h1>MG Menu</h1>
-      <p>Premium Live Resin & Liquid Diamonds 2g Dual Cartridges</p>
-      <p>Distributed by <strong>Highline Reserve</strong></p>
-    </div>
-    <div class="logo-grid">
-      <div class="logo-slot">
-        <img src="mg-logo.jpg" alt="MG Logo">
-      </div>
-      <div class="logo-slot">
-        <img src="highline-logo.png" alt="Highline Logo">
+  <div class="topbar">
+    <div class="topbar-content">
+      <div class="topbar-text">
+        <span>MG • Distributed by Highline</span>
+        <span>MG • Distributed by Highline</span>
       </div>
     </div>
   </div>
 
-  <div class="tiers">
-    <div class="tier-card">
-      <div class="tier-num">1</div>
-      <div class="tier-name">Solo</div>
-      <div class="tier-qty">1 unit</div>
-      <div class="tier-price">$30</div>
-      <div class="tier-per">per unit</div>
+  <div class="page">
+
+    <header>
+      <div class="brand-block">
+        <div class="powered-by">Distributed by Highline</div>
+        <h1>MG</h1>
+        <p class="tagline">Premium live resin & liquid diamonds · Quality guaranteed</p>
+      </div>
+
+      <div class="header-right">
+        <div class="logo-area">
+          <div class="logo-slot">
+            <img src="mg-logo.png" alt="MG" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div class="logo-divider"></div>
+          <div class="logo-slot">
+            <img src="highline-logo.png" alt="Highline" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+        </div>
+
+        <!-- CAROUSEL IN HEADER -->
+        <div class="carousel-container-header">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide"><img src="mg-carousel-1.jpg" alt="MG"></div>
+            <div class="carousel-slide"><img src="mg-carousel-2.jpg" alt="MG"></div>
+            <div class="carousel-slide"><img src="mg-carousel-3.jpg" alt="MG"></div>
+            <!-- Duplicate for infinite loop -->
+            <div class="carousel-slide"><img src="mg-carousel-1.jpg" alt="MG"></div>
+            <div class="carousel-slide"><img src="mg-carousel-2.jpg" alt="MG"></div>
+            <div class="carousel-slide"><img src="mg-carousel-3.jpg" alt="MG"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="section-label">Pricing Tiers</div>
+
+    <div class="tier-grid">
+
+      <div class="tier-card">
+        <div class="tier-num">1</div>
+        <div class="tier-name">Solo</div>
+        <div class="tier-qty">1 unit</div>
+        <div class="tier-price">$30</div>
+        <div class="tier-per">per unit</div>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-num">2</div>
+        <div class="tier-name">Bag</div>
+        <div class="tier-qty">10 – 99 units</div>
+        <div class="tier-price">$28</div>
+        <div class="tier-per">per unit</div>
+        <div class="savings-badge">Save $2</div>
+      </div>
+
+      <div class="tier-card featured">
+        <div class="tier-num">3</div>
+        <div class="tier-name">Box</div>
+        <div class="tier-qty">100 – 249 units</div>
+        <div class="tier-price">$25</div>
+        <div class="tier-per">per unit</div>
+        <div class="savings-badge">Save $5</div>
+      </div>
+
     </div>
 
-    <div class="tier-card">
-      <div class="tier-num">2</div>
-      <div class="tier-name">Bag</div>
-      <div class="tier-qty">10 – 99 units</div>
-      <div class="tier-price">$28</div>
-      <div class="tier-per">per unit</div>
-      <div class="savings-badge">Save $2</div>
+    <div class="cta-section">
+      <div class="cta-eyebrow">Moving volume?</div>
+      <div class="cta-title">Distributor Pricing</div>
+      <div class="cta-sub">250+ units gets exclusive wholesale pricing.</div>
+      <div class="cta-tiers">
+        <div class="cta-pill">Stack · 250–999 units @ $20</div>
+        <div class="cta-pill">Case · 1,000–2,499 units @ $19</div>
+        <div class="cta-pill">Wholesale · 2,500–4,999 units 🔒</div>
+        <div class="cta-pill">Partner · 5,000+ units 🔒</div>
+      </div>
+      <a class="cta-btn" href="https://t.me/highlinevip" target="_blank">
+        <svg style="width:20px;height:20px" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+        </svg>
+        Message on Telegram
+      </a>
+      <div class="cta-note">Vetted buyers only · Response within 24h</div>
     </div>
 
-    <div class="tier-card featured">
-      <div class="tier-num">3</div>
-      <div class="tier-name">Box</div>
-      <div class="tier-qty">100 – 249 units</div>
-      <div class="tier-price">$25</div>
-      <div class="tier-per">per unit</div>
-      <div class="savings-badge">Save $5</div>
+    <div class="footer-brand">
+      <span class="footer-brand-label">Distributed by</span>
+      <img src="highline-logo.png" alt="Highline">
+    </div>
+
+    <footer>
+      © 2026 MG · Premium live resin & liquid diamonds · Prices subject to availability
+    </footer>
+
+  </div>
+
+  <!-- CALCULATOR MODAL -->
+  <div class="calc-modal" id="calcModal">
+    <div class="calc-card">
+      <div class="calc-tier-name" id="modalTierName">Standard</div>
+      <div class="calc-tier-price" id="modalTierPrice">$20</div>
+      <div class="calc-per-unit">per unit</div>
+
+      <div class="calc-qty-group">
+        <label class="calc-qty-label">Quantity (units)</label>
+        <input type="number" class="calc-qty-input" id="modalQtyInput" placeholder="20" min="1" step="1">
+      </div>
+
+      <div class="calc-divider"></div>
+
+      <div class="calc-total">
+        <div class="calc-total-label">Your Total</div>
+        <div class="calc-total-value" id="modalTotalValue">$320</div>
+      </div>
+
+      <div class="calc-close-hint">Click anywhere to close</div>
     </div>
   </div>
 
-  <div class="cta-section">
-    <div class="cta-eyebrow">Moving serious volume?</div>
-    <div class="cta-title">Wholesale & Distributor Pricing</div>
-    <div class="cta-sub">Accounts moving 250+ units get exclusive wholesale pricing.</div>
-    <div class="cta-tiers">
-      <div class="cta-pill">Stack · 250–999 units @ $20</div>
-      <div class="cta-pill">Case · 1,000–2,499 units @ $19</div>
-      <div class="cta-pill">Wholesale · 2,500–4,999 units @ $18</div>
-      <div class="cta-pill">Partner · 5,000–9,999 units @ $17</div>
-      <div class="cta-pill">Elite · 10,000+ units @ $16</div>
-    </div>
-    <button class="cta-button" onclick="window.location.href='https://t.me/YOUR_TELEGRAM_USERNAME'">Inquire on Pricing</button>
-  </div>
+  <script>
+    const tiers = [
+      { name: 'Solo', qty: '1', price: 30.00 },
+      { name: 'Bag', qty: '10–99', price: 28.00 },
+      { name: 'Box', qty: '100–249', price: 25.00 }
+    ];
 
-  <div class="footer">
-    © 2026 MG · Premium Live Resin + Liquid Diamonds · Distributed by Highline Reserve
-  </div>
+    const calcModal = document.getElementById('calcModal');
+    const qtyInput = document.getElementById('modalQtyInput');
+    let activeIndex = null;
 
-</div>
+    function openCalculator(index) {
+      if (activeIndex === index) {
+        // Close if clicking same tier
+        closeCalculator();
+        return;
+      }
 
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <div class="modal-title" id="modalTierName">Solo</div>
-    <div class="modal-input-group">
-      <label class="modal-label">Quantity</label>
-      <input type="number" class="modal-input" id="qtyInput" placeholder="Enter quantity" min="1">
-    </div>
-    <div class="modal-total">
-      <div class="modal-total-label">Total Price</div>
-      <div class="modal-total-price" id="totalPrice">$30.00</div>
-    </div>
-  </div>
-</div>
+      activeIndex = index;
+      const tier = tiers[index];
 
-<script>
-  const tiers = [
-    { name: 'Solo', qty: '1', price: 30.00 },
-    { name: 'Bag', qty: '10–99', price: 28.00 },
-    { name: 'Box', qty: '100–249', price: 25.00 }
-  ];
+      document.getElementById('modalTierName').textContent = tier.name;
+      document.getElementById('modalTierPrice').textContent = '$' + tier.price.toFixed(2);
+      qtyInput.placeholder = tier.qty.split('–')[0] || tier.qty;
+      qtyInput.value = '';
+      qtyInput.focus();
 
-  const modal = document.getElementById('modal');
-  const modalTierName = document.getElementById('modalTierName');
-  const qtyInput = document.getElementById('qtyInput');
-  const totalPrice = document.getElementById('totalPrice');
-
-  let currentPrice = 30.00;
-
-  document.querySelectorAll('.tier-card').forEach((card, i) => {
-    card.addEventListener('click', () => {
-      currentPrice = tiers[i].price;
-      modalTierName.textContent = tiers[i].name;
-      qtyInput.value = tiers[i].qty.split('–')[0];
-      updateTotal();
-      modal.classList.add('active');
-    });
-  });
-
-  qtyInput.addEventListener('input', updateTotal);
-
-  function updateTotal() {
-    const qty = parseInt(qtyInput.value) || 0;
-    const total = (qty * currentPrice).toFixed(2);
-    totalPrice.textContent = '$' + total;
-  }
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('active');
+      calcModal.classList.add('active');
     }
-  });
-</script>
+
+    function closeCalculator() {
+      calcModal.classList.remove('active');
+      activeIndex = null;
+    }
+
+    function updateTotal() {
+      const price = tiers[activeIndex].price;
+      const qty = parseInt(qtyInput.value) || 0;
+      const total = price * qty;
+
+      document.getElementById('modalTotalValue').textContent = '$' + total.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    }
+
+    // Attach click handlers to tier cards
+    document.querySelectorAll('.tier-card').forEach((card, idx) => {
+      card.addEventListener('click', () => openCalculator(idx));
+      card.style.cursor = 'pointer';
+    });
+
+    // Close on modal background click
+    calcModal.addEventListener('click', (e) => {
+      if (e.target === calcModal) closeCalculator();
+    });
+
+    // Update total on quantity input
+    qtyInput.addEventListener('input', updateTotal);
+  </script>
 
 </body>
 </html>
